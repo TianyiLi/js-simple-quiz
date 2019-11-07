@@ -11,7 +11,13 @@
         :hasInput="false"
         :title="'實作'"
         :answer="[]"
-        :quiz="phpQuiz"></Quiz>
+        :quiz="phpQuiz">
+        <pre>
+And I put it at
+<a href="https://paullee.dev.taipei/laragirl/api.php">https://paullee.dev.taipei/laragirl/api.php</a>
+Hope you can get all the echo string!
+        </pre>
+        </Quiz>
     </div>
   </div>
 </template>

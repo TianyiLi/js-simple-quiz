@@ -46,6 +46,7 @@ export default class QuestComponent extends Vue {
     <h3># {{''+title}}</h3>
     <table class="quest"
       v-html="quizFormat"></table>
+    <slot></slot>
     <input type="text"
       v-if="hasInput"
       :class="isError && 'error' || ''"
