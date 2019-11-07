@@ -1,18 +1,11 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import hljs from 'highlight.js'
-import { init } from '@/plugins/highlight-linenum'
 import 'highlight.js/styles/default.css'
 import 'highlight.js/styles/github.css'
 
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'))
 hljs.registerLanguage('php', require('highlight.js/lib/languages/php'))
-init(hljs)
-hljs.initHighlightingOnLoad({
-  singleLine: true
-})
-
-hljs.initLineNumbersOnLoad()
 
 @Component
 export default class QuestComponent extends Vue {
