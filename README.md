@@ -1,5 +1,7 @@
 # lara-test
 
+[preview](https://tianyili.github.io/js-simple-quiz)
+
 ## Project setup
 ```
 yarn install
