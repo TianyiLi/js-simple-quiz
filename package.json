@@ -10,6 +10,7 @@
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
   },
   "dependencies": {
+    "@types/highlight.js": "^9.12.3",
     "core-js": "^3.3.2",
     "gh-pages": "^2.1.1",
     "highlight.js": "^9.16.2",
