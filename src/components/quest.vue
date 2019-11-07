@@ -1,23 +1,40 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import hljs from 'highlight.js'
+import { init } from '@/plugins/highlight-linenum'
 import 'highlight.js/styles/default.css'
 import 'highlight.js/styles/github.css'
 
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'))
+hljs.registerLanguage('php', require('highlight.js/lib/languages/php'))
+init(hljs)
+hljs.initHighlightingOnLoad({
+  singleLine: true
+})
+
+hljs.initLineNumbersOnLoad()
 
 @Component
 export default class QuestComponent extends Vue {
   @Prop() quiz!: string
   @Prop() title!: any
   @Prop() answer!: string[]
+  @Prop({
+    default: 'javascript'
+  }) type!: string
+
+  @Prop({
+    default: true
+  }) hasInput!: boolean
 
   value: string = ''
   isError = false
   isCorrect = false
 
   get quizFormat () {
-    return hljs.highlight('javascript', this.quiz).value
+    const _result = hljs.highlight(this.type, this.quiz).value
+    return (_result.split('\n').map((line: string, i: number) => `<tr><td>${i + 1}</td><td>${line}</td></tr>`)).join('\n')
+    // return _result
   }
 
   onConfirm () {
@@ -34,13 +51,15 @@ export default class QuestComponent extends Vue {
 <template>
   <div class="input-group">
     <h3># {{''+title}}</h3>
-    <pre class="quest"
-      v-html="quizFormat"></pre>
+    <table class="quest"
+      v-html="quizFormat"></table>
     <input type="text"
+      v-if="hasInput"
       :class="isError && 'error' || ''"
       :disabled="isCorrect"
       v-model="value">
-    <button @click="onConfirm">Confirm</button>
+    <button v-if="hasInput"
+      @click="onConfirm">Confirm</button>
   </div>
 </template>
 <style lang="stylus" scoped>
@@ -53,14 +72,23 @@ export default class QuestComponent extends Vue {
   box-shadow 0 10px 20px rgba(0, 0, 0, 0.2)
   margin 15px auto
 .quest
-  font-size 1.25em
+  font-size 14px
+  width 30rem
+  overflow-x auto
   padding 1rem
   padding-left 0.3rem
-  border-left 1rem solid rgba(0, 0, 0, 0.4)
-  background-color rgba(0, 0, 0, 0.2)
+  border solid 1px #e1e4e8
+  background-color #fafbfc
+  margin-bottom 10px
+  >>> td:first-child
+    width 2em
+    line-height 20px
+    text-align right
+    font-size 14px
+    color rgba(27, 31, 35, 0.3)
+    padding-right 15px
 input
   width 13rem
-  margin-left 1rem
   padding 0.3rem 0.5rem
   font-size 1.25em
   border-radius 3px
@@ -71,7 +99,6 @@ input
   &[disabled]
     outline green
     box-shadow 0 0 10px green
-
 button
   appearance none
   cursor pointer
@@ -83,7 +110,7 @@ button
   color white
   font-weight bold
   float right
-  transition .3s
+  transition 0.3s
   &:hover
     background #e5e5e5
     color black

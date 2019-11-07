@@ -108,8 +108,21 @@ console.log(bar2.method());
     `,
     answer: ['this is bar'],
     input: ''
-  }
+  },
 ]
+
+const phpQuiz = `
+<?php
+if (@$_GET['name']) {
+  echo '{"message":"success"}';
+} else if(@$_POST['name']) {
+  echo '{"message":"get the name field: ' . $_POST['name'] . '" }';
+} else {
+  echo '{"message": "failed"}';
+}
+?>
+`
 export {
-  quests
+  quests,
+  phpQuiz
 }

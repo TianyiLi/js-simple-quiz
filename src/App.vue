@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
 </template>
 
@@ -13,7 +13,7 @@ import HelloWorld from './components/HelloWorld.vue'
     HelloWorld
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue { }
 </script>
 
 <style lang="stylus">
@@ -26,4 +26,16 @@ html, body
   -moz-osx-font-smoothing grayscale
   color #2c3e50
   margin-top 60px
+*
+  &::-webkit-scrollbar
+    height 10px
+    width 10px
+    background-color transparent
+  &::-webkit-scrollbar-thumb
+    background-color rgba(170, 170, 170, 0.3)
+    &:hover
+      background-color #777
+    border-radius 5px
+  &::-webkit-scrollbar-track
+    background-color transparent
 </style>
