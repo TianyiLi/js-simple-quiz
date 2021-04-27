@@ -8,7 +8,7 @@ if (a == true && a > 0 || a <= 2) {
   console.log(false);
 }
   `,
-    answer: ['false'],
+    answer: ['true'],
   },
   {
     quiz: `
